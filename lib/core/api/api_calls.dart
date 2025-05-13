@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:todo_application/constants/api_constants.dart';
+import 'package:todo_application/core/api/dio_exception.dart';
 
 class ApiCalls {
   //* get method
@@ -22,7 +23,8 @@ class ApiCalls {
     return response.data;
     } on DioException catch(e)
     {
-      throw DioException(requestOptions: e.requestOptions);
+      
+      throw CustomDioException.fromDioError(e);
     }
   }
 }
