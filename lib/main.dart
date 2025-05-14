@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todo_application/core/services/service_locator.dart';
 import 'package:todo_application/features/home/presentation/screens/home_screen.dart';
 
 void main() {
+  serviceLocator();
   runApp(const MyApp());
 }
 

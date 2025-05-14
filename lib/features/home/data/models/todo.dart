@@ -15,7 +15,7 @@ class Todo
       required this.isCompleted
     }
   );
-  factory Todo.fromJson(Map<String, dynamic> json) {
+  factory Todo.fromMap(Map<String, dynamic> json) {
     return Todo(
       id: json['id'] as int,
       title: json['title'] as String,
