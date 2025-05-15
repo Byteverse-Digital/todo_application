@@ -7,9 +7,9 @@ final GetIt getIt = GetIt.instance();
 
 serviceLocator()
 {
-  getIt.registerLazySingleton<ApiCalls>(getIt<ApiCalls>);
+  getIt.registerLazySingleton<ApiCalls>(getIt.call<ApiCalls>);
 
-  getIt.registerLazySingleton<TodoDataSource>(getIt<TodoDataSource>);
+  getIt.registerLazySingleton<TodoDataSource>(getIt.call<TodoDataSource>);
 
-  getIt.registerLazySingleton<TodoRepository>(getIt<TodoRepository>);
+  getIt.registerLazySingleton<TodoRepository>(getIt.call<TodoRepository>);
 }

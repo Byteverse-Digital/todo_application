@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'; 
 import 'package:todo_application/core/services/service_locator.dart';
+import 'package:todo_application/features/home/data/repositories/todo_repository.dart';
+import 'package:todo_application/features/home/presentation/blocs/bloc/todo_bloc.dart';
 import 'package:todo_application/features/home/presentation/screens/home_screen.dart';
+
 
 void main() {
   serviceLocator();
@@ -13,14 +17,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-       
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (ctx) => TodoBloc(getIt<TodoRepository>())),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
+        home: const HomeScreen(),
       ),
-      debugShowCheckedModeBanner: false,
-      home:  HomeScreen(),
     );
   }
 }
