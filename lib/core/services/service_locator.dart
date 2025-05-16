@@ -3,13 +3,19 @@ import 'package:todo_application/core/api/api_calls.dart';
 import 'package:todo_application/features/home/data/repositories/todo_repository.dart';
 import 'package:todo_application/features/home/data/sources/todo_data_source.dart';
 
-final GetIt getIt = GetIt.instance();
+final GetIt getIt = GetIt.instance;
 
-serviceLocator()
-{
-  getIt.registerLazySingleton<ApiCalls>(getIt.call<ApiCalls>);
+void serviceLocator() {
+  // Register ApiCalls first, since it's used by TodoDataSource
+  getIt.registerLazySingleton<ApiCalls>(() => ApiCalls());
 
-  getIt.registerLazySingleton<TodoDataSource>(getIt.call<TodoDataSource>);
+  // Register TodoDataSource and inject ApiCalls from GetIt
+  getIt.registerLazySingleton<TodoDataSource>(
+    () => TodoDataSourceImpl(getIt<ApiCalls>()),
+  );
 
-  getIt.registerLazySingleton<TodoRepository>(getIt.call<TodoRepository>);
+  // Register TodoRepository and inject TodoDataSource from GetIt
+  getIt.registerLazySingleton<TodoRepository>(
+    () => TodoRepositoryImpl(getIt<TodoDataSource>()),
+  );
 }

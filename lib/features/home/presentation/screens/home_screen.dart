@@ -7,6 +7,9 @@ class HomeScreen extends StatelessWidget {
 
   @override 
   Widget build(BuildContext context) {
+
+    final todoBloc = context.read<TodoBloc>().add(FetchTodoEvent());
+    
     return  Scaffold(
       appBar: AppBar(
         title: Text("Home Page",style: TextStyle(color: Colors.white),
