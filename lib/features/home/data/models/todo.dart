@@ -5,7 +5,7 @@ class Todo {
   final int id;
   final String title;
   final String description;
-  final int isCompleted;
+  final bool isCompleted;
 
   Todo({
     required this.id,
@@ -28,7 +28,7 @@ class Todo {
       id: map['id'] as int,
       title: map['title'] as String,
       description: map['description'] as String,
-      isCompleted: map['completed'] as int, // use 'completed' here too
+      isCompleted: map['completed'] ==1 ? true : false, // use 'completed' here too
     );
   }
 
