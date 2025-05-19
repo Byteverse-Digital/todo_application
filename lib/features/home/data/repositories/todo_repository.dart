@@ -6,7 +6,10 @@ import '../models/todo.dart';
 
 abstract class TodoRepository {
   Future<Either<ApiError,List<Todo>>>fetchTodo();
+  Future<Either<ApiError,String>> storeTodo({required Map<String, dynamic> todo});
 }
+
+
 
 class TodoRepositoryImpl extends TodoRepository
 {
@@ -26,6 +29,18 @@ class TodoRepositoryImpl extends TodoRepository
     {
       return left<ApiError, List<Todo>>(ApiError(errorMessage: e.toString(),));
     }
+   }
+   
+     @override
+     Future<Either<ApiError, String>> storeTodo({required Map<String, dynamic> todo}) async {
+       try {
+         final result = await todoDataSource.storeTodo(todo: todo);
+         return right(result);
+       } catch (e) {
+         return left(ApiError(errorMessage: e.toString()));
+       }
+     }
+
    }
 
 }
