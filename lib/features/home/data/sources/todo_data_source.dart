@@ -25,7 +25,8 @@ abstract class TodoDataSource {
           endpoints: "todo",
           data: todo,
         ) as List;
-        return result['message'];
+        String value = result['message'];
+        return value;
       }
   }
 

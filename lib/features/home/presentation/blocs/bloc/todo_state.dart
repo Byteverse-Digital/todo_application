@@ -23,3 +23,14 @@ class fetchTodoFall extends TodoState
   fetchTodoFall(this.errorMessage);
 }
 
+
+// add todo events
+class AddTodoLoadingState extends TodoState {}
+class AddTodoSuccessState extends TodoState {
+  final String message;
+  AddTodoSuccessState(this.message);
+}
+class AddTodoFailState extends TodoState {
+  final String message;
+  AddTodoFailState(this.message);
+}
